@@ -1,0 +1,20 @@
+class Solution {
+    Node deleteMid(Node head) {
+         Node f= head;
+     Node s=head;
+     Node p=null;
+     while(f!=null && f.next!=null){
+         p=s;
+         f=f.next.next;
+         s=s.next;
+     }
+     if(p!=null){ 
+       p.next=s.next;
+         }
+         else{
+             head=head.next;
+         }
+     
+     return  head;
+    }
+}
