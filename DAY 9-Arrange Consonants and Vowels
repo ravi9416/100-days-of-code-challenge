@@ -1,0 +1,33 @@
+class Solution {
+    
+    public Node arrangeCV(Node head){
+         Node temp=head;
+        Node dummy=new Node('\0');
+        Node curr=dummy;
+        while(temp!=null)
+        {
+            char c=temp.data;
+            if(c=='a' || c=='e' || c=='i' || c=='o' || c=='u')
+            {
+                temp.data='\0';
+                Node newNode=new Node(c);
+                curr.next=newNode;
+                curr=curr.next;
+            }
+            temp=temp.next;
+        }
+        temp=head;
+        while(temp!=null)
+        {
+            char c=temp.data;
+            if((c!='a' || c!='e' || c!='i' || c!='o' || c!='u') && c!='\0')
+            {
+                Node newNode=new Node(temp.data);
+                curr.next=newNode;
+                curr=curr.next;
+            }
+            temp=temp.next;
+        }
+        return dummy.next;
+    }
+}
