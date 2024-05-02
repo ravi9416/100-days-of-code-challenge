@@ -1,0 +1,63 @@
+class Tree {
+    // Function to serialize a tree and return a list containing nodes of tree.
+    public ArrayList<Integer> serialize(Node root) {
+        ArrayList<Integer> sol = new ArrayList<>();
+        inOrder(root, sol);
+        // System.out.println("InOrder:"+sol);
+        return sol;
+    }
+    
+    protected void inOrder(Node root, List<Integer> sol){
+        if(root == null)
+            return;
+            
+        inOrder(root.left, sol);
+        sol.add(root.data);
+        inOrder(root.right, sol);
+    }
+
+    // Function to deserialize a list and construct the tree.
+    public Node deSerialize(ArrayList<Integer> A) {
+           int minIndex = findMin(A, 0, A.size()-1);
+        
+        // System.out.println("Min index root:"+minIndex);
+        
+        Node root = new Node(A.get(minIndex));
+        insertLeft(root, A, 0, minIndex-1);
+        insertRight(root, A, minIndex+1, A.size()-1);
+        return root;
+    }
+    
+    public int findMin(List<Integer> list, int start, int end){
+        int minIndex = start;
+        for(int i = start; i<=end; i++){
+            if(list.get(i) < list.get(minIndex))
+                minIndex = i;
+        }
+        return minIndex;
+    }
+    
+    protected void insertLeft(Node root, List<Integer> list, int start, int end){
+        if(start> end)
+            return;
+        
+        int minIndex = findMin(list, start, end);
+        // System.out.println("Min index insertLeft:"+minIndex);
+        root.left = new Node(list.get(minIndex));
+        insertLeft(root.left, list, start, minIndex-1);
+        insertRight(root.left, list, minIndex+1, end);
+    }
+    
+    protected void insertRight(Node root, List<Integer> list, int start, int end){
+        if(start> end)
+            return;
+        
+        int minIndex = findMin(list, start, end);
+        // System.out.println("Min index insertRight:"+minIndex);
+        root.right = new Node(list.get(minIndex));
+        insertLeft(root.right, list, start, minIndex-1);
+        insertRight(root.right, list, minIndex+1, end);
+    }
+
+
+    }
