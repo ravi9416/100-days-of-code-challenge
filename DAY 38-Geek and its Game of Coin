@@ -1,0 +1,23 @@
+
+class Solution {
+    public static int findWinner(int n, int x, int y) {
+        // code here
+         boolean mem[] = new boolean[n+1];
+        mem[0] = true;
+        
+        List<Integer> choices = Arrays.asList(x, y, 1);
+        
+        for(int i=1; i<=n; i++) {
+            for(int choice : choices) {
+                if(choice == i) {
+                    mem[i] = true;
+                } else if(choice < i) {
+                    mem[i] = mem[i] || !mem[i-choice];
+                }
+            }
+            // System.out.println(mem[i]);
+        }
+        
+        return mem[n] ? 1 : 0;
+    }
+}
