@@ -1,0 +1,22 @@
+class Solution {
+    static String armstrongNumber(int n) {
+        // code here
+        int ans=0;
+        // now create another variable to store number & manipulate digits
+        int z=n;
+        // keep iterating until number becomes zero
+        while(z!=0){
+            // store last digit in a varialbe
+            int a=z%10;
+            // cube and add it to answer
+            ans+=a*a*a;
+            // remove the last digit from z
+            z=z/10;
+        }
+        // check if the answer is equal to original number
+        if(ans==n){
+            return "true";
+        }
+        return "false";
+    }
+}
